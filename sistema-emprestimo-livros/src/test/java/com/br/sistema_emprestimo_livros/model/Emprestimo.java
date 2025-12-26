@@ -59,6 +59,12 @@ public class Emprestimo {
         return dataEmprestimo;
     }
 
+    public void setDataEmprestimo(LocalDate dataEmprestimo){
+
+        this.dataEmprestimo = dataEmprestimo;
+
+    }
+
     public LocalDate getDataDevolucao() {
         return dataDevolucao;
     }
@@ -75,4 +81,11 @@ public class Emprestimo {
         this.statusEmprestimo = statusEmprestimo;
     }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
 }

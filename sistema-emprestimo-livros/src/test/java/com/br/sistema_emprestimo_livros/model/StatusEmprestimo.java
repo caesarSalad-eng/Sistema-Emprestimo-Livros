@@ -4,7 +4,7 @@ public enum StatusEmprestimo {
 
     ATIVO,
 
-    DEVOLVIDO,
+    LIVRO_DEVOLVIDO,
 
     ATRASADO;
 

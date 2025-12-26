@@ -15,7 +15,8 @@ public class Livro {
     @Column(nullable = false)
     private String autor;
 
-    private boolean disponivel;
+    @Enumerated(EnumType.STRING)
+    private StatusLivro statusLivro;
 
     public Livro(){}
 
@@ -47,11 +48,12 @@ public class Livro {
         this.autor = autor;
     }
 
-    public boolean isDisponivel() {
-        return disponivel;
+    public StatusLivro getStatusLivro() {
+        return statusLivro;
     }
 
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
+    public void setStatusLivro(StatusLivro statusLivro) {
+        this.statusLivro = statusLivro;
     }
+
 }
