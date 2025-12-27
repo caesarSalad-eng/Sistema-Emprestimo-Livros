@@ -7,8 +7,8 @@ import com.br.sistema_emprestimo_livros.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 @Service
 public class EmprestimoService {
@@ -19,7 +19,7 @@ public class EmprestimoService {
 
     private final LivroRepository livroRepository;
 
-    public EmprestimoService(LivroRepository livroRepository, Scanner sc, EmprestimoRepository emprestimoRepository, UsuarioRepository usuarioRepository){
+    public EmprestimoService(LivroRepository livroRepository, EmprestimoRepository emprestimoRepository, UsuarioRepository usuarioRepository){
 
         this.emprestimoRepository = emprestimoRepository;
 
@@ -105,7 +105,7 @@ public class EmprestimoService {
         }
 
 
-        if (emprestimo.getStatusEmprestimo() == StatusEmprestimo.ATIVO && emprestimo.getStatusEmprestimo() == StatusEmprestimo.ATRASADO) {
+        if (emprestimo.getStatusEmprestimo() == StatusEmprestimo.ATIVO || emprestimo.getStatusEmprestimo() == StatusEmprestimo.ATRASADO) {
 
             emprestimo.setStatusEmprestimo(StatusEmprestimo.LIVRO_DEVOLVIDO);
             emprestimo.setDataDevolucao(LocalDate.now());
@@ -124,6 +124,126 @@ public class EmprestimoService {
 
         }
 
+
+    }
+
+    public String listarEmprestimos(){
+
+        List<Emprestimo> emprestimo = emprestimoRepository.findAll();
+
+        if(emprestimo.isEmpty()){
+
+            return "Não há empréstimos cadastrados. A lista está vazia";
+
+        }
+
+        StringBuilder resultadoLista = new StringBuilder();
+
+            for (Emprestimo listaEmprestimos : emprestimo){
+
+                resultadoLista.append("\nID Emprétimo: ").append(listaEmprestimos.getId());
+                resultadoLista.append("\nUsuário: ").append(listaEmprestimos.getUsuario().getNome());
+                resultadoLista.append("\nLivro: ").append(listaEmprestimos.getLivro().getTitulo());
+                resultadoLista.append("\nStatus: ").append(listaEmprestimos.getStatusEmprestimo());
+                resultadoLista.append("\n-------------------------------------------------------");
+
+            }
+
+        return resultadoLista.toString();
+
+    }
+
+    public String buscarEmprestimoPorId(Long id){
+
+        Optional<Emprestimo> emprestimosList = emprestimoRepository.findById(id);
+
+        if (emprestimosList.isEmpty()){
+
+            return "Empréstimo não encontrado";
+
+        }
+
+        Emprestimo emprestimo = emprestimosList.get();
+
+        StringBuilder resultadoBusca = new StringBuilder();
+
+        resultadoBusca.append("\nID Empréstimo: ").append(emprestimo.getId());
+        resultadoBusca.append("\nUsuário: ").append(emprestimo.getUsuario().getNome());
+        resultadoBusca.append("\nLivro: ").append(emprestimo.getLivro().getTitulo());
+        resultadoBusca.append("\nStatus: ").append(emprestimo.getStatusEmprestimo());
+        resultadoBusca.append("\nData Empréstimo: ").append(emprestimo.getDataEmprestimo());
+
+        return resultadoBusca.toString();
+
+    }
+
+    public String buscarEmprestimoPorUsuario(Long usuarioId){
+
+        Optional<Usuario> optUsuario = usuarioRepository.findById(usuarioId);
+
+        if (optUsuario.isEmpty()){
+
+            return "Usuário não encontrado";
+
+        }
+
+        List<Emprestimo> emprestimoList = emprestimoRepository.findByUsuarioId(usuarioId);
+
+        if (emprestimoList.isEmpty()){
+
+            return "O usuário não pussui empréstimos";
+
+        }
+
+        StringBuilder resultadoEmprestimos = new StringBuilder();
+
+        for (Emprestimo emprestimo : emprestimoList){
+
+            resultadoEmprestimos.append("\n Id: ").append(emprestimo.getId());
+            resultadoEmprestimos.append("\nNome: ").append(emprestimo.getUsuario().getNome());
+            resultadoEmprestimos.append("Status: ").append(emprestimo.getStatusEmprestimo());
+            resultadoEmprestimos.append("Data de Empréstimo: ").append(emprestimo.getDataEmprestimo());
+            resultadoEmprestimos.append("Data Devolução: ").append(emprestimo.getDataDevolucao());
+
+        }
+
+        return resultadoEmprestimos.toString();
+
+    }
+
+    public String emprestimosAtrasados (){
+
+        List<Emprestimo> emprestimoListAtrasados = emprestimoRepository.findAll();
+
+        if (emprestimoListAtrasados.isEmpty()){
+
+            return "Não há empréstimos salvos";
+
+        }
+        StringBuilder resultadoEmprestimosAtrasados = new StringBuilder();
+
+        for (Emprestimo emprestimosAtrasados : emprestimoListAtrasados){
+
+            if (emprestimosAtrasados.getStatusEmprestimo() == StatusEmprestimo.ATRASADO){
+
+                resultadoEmprestimosAtrasados.append("\nID: ").append(emprestimosAtrasados.getId());
+                resultadoEmprestimosAtrasados.append("\nLivro: ").append(emprestimosAtrasados.getLivro().getTitulo());
+                resultadoEmprestimosAtrasados.append("\nUsuário: ").append(emprestimosAtrasados.getUsuario().getNome());
+                resultadoEmprestimosAtrasados.append("\nUsuário Id: ").append(emprestimosAtrasados.getUsuario().getId());
+                resultadoEmprestimosAtrasados.append("\nUsuário Email: ").append(emprestimosAtrasados.getUsuario().getEmail());
+
+            }
+
+
+        }
+
+        if (resultadoEmprestimosAtrasados.isEmpty()){
+
+            return "Não há Empréstimos Atrasados";
+
+        }
+
+        return resultadoEmprestimosAtrasados.toString();
 
     }
 
