@@ -1,15 +1,11 @@
 package com.br.sistema_emprestimo_livros.runner;
 
-import com.br.sistema_emprestimo_livros.model.Usuario;
 import com.br.sistema_emprestimo_livros.service.EmprestimoService;
 import com.br.sistema_emprestimo_livros.service.LivroService;
 import com.br.sistema_emprestimo_livros.service.UsuarioService;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.naming.BinaryRefAddr;
-import java.util.List;
 import java.util.Scanner;
 
 @Component
@@ -95,69 +91,73 @@ public class Menu implements CommandLineRunner {
 
     public void menuUsuario(){
 
-        System.out.println("\n== MENU USUÁRIO ==");
-        System.out.println("\n1 - Cadastrar Usuário");
-        System.out.println("\n2 - Listar Usuários");
-        System.out.println("\n3 - Buscar Usuário por ID");
-        System.out.println("\n4 - Busca Usuário por EMAIL");
-        System.out.println("\n5 - Atualizar Usuário");
-        System.out.println("\n6 -  Deletar Usuário");
-        System.out.println("\n0 - Voltar para MENU PRINCIPAL");
+      int opcaoMenuUsuario;
 
-        int opcaoMenuUsuario =  sc.nextInt();
-        sc.nextLine();
+      do {
+          System.out.println("\n== MENU USUÁRIO ==");
+          System.out.println("\n1 - Cadastrar Usuário");
+          System.out.println("\n2 - Listar Usuários");
+          System.out.println("\n3 - Buscar Usuário por ID");
+          System.out.println("\n4 - Busca Usuário por EMAIL");
+          System.out.println("\n5 - Atualizar Usuário");
+          System.out.println("\n6 -  Deletar Usuário");
+          System.out.println("\n0 - Voltar para MENU PRINCIPAL");
 
-        switch (opcaoMenuUsuario){
+          opcaoMenuUsuario = sc.nextInt();
+          sc.nextLine();
 
-            case 1:
+          switch (opcaoMenuUsuario){
 
-                cadastroUsuario();
+              case 1:
 
-                break;
+                  cadastroUsuario();
 
-            case 2:
+                  break;
 
-                listarUsuarios();
+              case 2:
 
-                break;
+                  listarUsuarios();
 
-            case 3:
+                  break;
 
-                buscarUsuarioPorId();
+              case 3:
 
-                break;
+                  buscarUsuarioPorId();
 
-            case 4:
+                  break;
 
-                buscarUsuarioPorEmail();
+              case 4:
 
-                break;
+                  buscarUsuarioPorEmail();
 
-            case 5:
+                  break;
 
-                atualizarUsuario();
+              case 5:
 
-                break;
+                  atualizarUsuario();
 
-            case 6:
+                  break;
 
-                deletarUsuario();
+              case 6:
 
-                break;
+                  deletarUsuario();
 
-            case 0:
+                  break;
+
+              case 0:
+
+                  System.out.println("Voltando ao menu principal...");
+
+                  break;
+
+              default:
+
+                  System.out.println("Opção inválida. Tente Novamente");
 
 
+          }
 
-                break;
-
-            default:
-
-                System.out.println("Opção inválida. Tente Novamente");
-
-
-        }
-
+      } while (opcaoMenuUsuario != 0);
 
     }
 
@@ -226,7 +226,7 @@ public class Menu implements CommandLineRunner {
         System.out.println("\nDigite o Novo Nome do Usuário: ");
         String novoNome = sc.nextLine();
 
-        System.out.println("\nDigite o Nome Email do Usuário: ");
+        System.out.println("\nDigite o Novo Email do Usuário: ");
         String novoEmail = sc.nextLine();
 
         String resultadoAtualizacao = usuarioService.atualizarUsuario(id, novoNome, novoEmail);
@@ -251,59 +251,66 @@ public class Menu implements CommandLineRunner {
 
     public void menuLivros(){
 
-        System.out.println("\n== MENU LIVROS ==");
-        System.out.println("\n1 - Cadastrar Novo Livro");
-        System.out.println("\n2 - Listar Livros");
-        System.out.println("\n3 - Buscar Livro por ID");
-        System.out.println("\n4 - Atualizar Livro");
-        System.out.println("\n5 - Deletar Livro");
-        System.out.println("\n0 - Voltar para o MENU PRINCIPAL ");
+        int opcaoMenuLivros;
 
-        int opcaoMenuLivros = sc.nextInt();
-        sc.nextLine();
+        do {
 
-        switch (opcaoMenuLivros){
+            System.out.println("\n== MENU LIVROS ==");
+            System.out.println("\n1 - Cadastrar Novo Livro");
+            System.out.println("\n2 - Listar Livros");
+            System.out.println("\n3 - Buscar Livro por ID");
+            System.out.println("\n4 - Atualizar Livro");
+            System.out.println("\n5 - Deletar Livro");
+            System.out.println("\n0 - Voltar para o MENU PRINCIPAL ");
 
-            case 1:
+            opcaoMenuLivros = sc.nextInt();
+            sc.nextLine();
 
-                cadastrarLivro();
+            switch (opcaoMenuLivros){
 
-                break;
+                case 1:
 
-            case 2:
+                    cadastrarLivro();
 
-                listarLivros();
+                    break;
 
-                break;
+                case 2:
 
-            case 3:
+                    listarLivros();
 
-                buscarLivrosPorId();
+                    break;
 
-                break;
+                case 3:
 
-            case 4:
+                    buscarLivrosPorId();
 
-                atualizarLivro();
+                    break;
 
-                break;
+                case 4:
 
-            case 5:
+                    atualizarLivro();
 
-                deletarLivro();
+                    break;
 
-                break;
+                case 5:
 
-            case 0:
+                    deletarLivro();
 
-                break;
+                    break;
 
-            default:
+                case 0:
 
-                System.out.println("Opção inválida. Tente Novamente");
+                    System.out.println("Voltando ao menu principal...");
 
-        }
+                    break;
 
+                default:
+
+                    System.out.println("Opção inválida. Tente Novamente");
+
+            }
+
+        } while (opcaoMenuLivros != 0);
 
     }
 
@@ -382,7 +389,154 @@ public class Menu implements CommandLineRunner {
     }
 
     public void menuEmprestimos(){
-        
+
+        int opcaoMenuEmprestimo;
+
+        do {
+
+            System.out.println("\n== MENU EMPRÉSTIMO ==");
+            System.out.println("\n1 - Emprestar Livro");
+            System.out.println("\n2 - Devolver Livro");
+            System.out.println("\n3 - Lista Empréstimos ");
+            System.out.println("\n4 - Buscar por ID");
+            System.out.println("\n5 - Buscar por Usuário");
+            System.out.println("\n6 - Listar Empréstimos Atrasados");
+            System.out.println("\n0 - Voltar ao MENU PRINCIPAL");
+            opcaoMenuEmprestimo = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcaoMenuEmprestimo){
+
+                case 1:
+
+                    emprestarLivro();
+
+                    break;
+
+                case 2:
+
+                    devolverLivro();
+
+                    break;
+
+                case 3:
+
+                    listarEmprestimos();
+
+                    break;
+
+                case 4:
+
+                    buscarEmprestimoPorId();
+
+                    break;
+
+                case 5:
+
+                    buscarEmprestimoPorUsuario();
+
+                    break;
+
+                case 6:
+
+                    listarEmprestimosAtrasados();
+
+                    break;
+
+                case 0:
+
+                    System.out.println("Voltando ao menu principal...");
+
+                    break;
+
+                default:
+
+                    System.out.println("Opção inválida. Tente Novamente");
+
+            }
+
+        } while (opcaoMenuEmprestimo != 0);
+
+    }
+
+    public void emprestarLivro(){
+
+        System.out.println("\n== EMPRÉSTIMO DE LIVRO ==");
+
+        System.out.println("Digite o ID do Usuário que vai pegar o Livro: ");
+        Long idUsuarioEmprestar = sc.nextLong();
+        sc.nextLine();
+
+        System.out.println("Digite o ID do Livro que será emprestado: ");
+        Long idLivroEmprestar = sc.nextLong();
+        sc.nextLine();
+
+        String resultadoEmprestarLivro = emprestimoService.emprestarLivro(idUsuarioEmprestar, idLivroEmprestar);
+
+        System.out.println(resultadoEmprestarLivro);
+
+    }
+
+    public void devolverLivro(){
+
+        System.out.println("\n== DEVOLVER LIVRO ==");
+
+        System.out.println("Digite o ID do Empréstimo que deseja devolver: ");
+        Long idEmprestimoDevolver = sc.nextLong();
+        sc.nextLine();
+
+        String resultadoDevolverLivro = emprestimoService.devolverLivro(idEmprestimoDevolver);
+
+        System.out.println(resultadoDevolverLivro);
+
+    }
+
+    public void listarEmprestimos(){
+
+        System.out.println("\n== LISTAR EMPRÉSTIMOS ==");
+
+        String resultadoListaEmprestimos = emprestimoService.listarEmprestimos();
+
+        System.out.println(resultadoListaEmprestimos);
+
+    }
+
+    public void buscarEmprestimoPorId(){
+
+        System.out.println("\n== BUSCA DE EMPRÉSTIMOS POR ID");
+
+        System.out.println("Digite o ID do empréstimo que deseja buscar: ");
+        Long idEmprestimoBuscaPorId = sc.nextLong();
+        sc.nextLine();
+
+        String resultadoBuscaEmprestimoPorId = emprestimoService.buscarEmprestimoPorId(idEmprestimoBuscaPorId);
+
+        System.out.println(resultadoBuscaEmprestimoPorId);
+
+    }
+
+    public void buscarEmprestimoPorUsuario(){
+
+        System.out.println("\n== BUSCAR EMPRÉSTIMO POR USUÁRIO");
+
+        System.out.println("Digite o ID do Usuário: ");
+        Long idUsuarioBuscaEmprestimo = sc.nextLong();
+        sc.nextLine();
+
+        String resultadoBuscaEmprestimoPorUsuario = emprestimoService.buscarEmprestimoPorUsuario(idUsuarioBuscaEmprestimo);
+
+        System.out.println(resultadoBuscaEmprestimoPorUsuario);
+
+    }
+
+    public void listarEmprestimosAtrasados(){
+
+        System.out.println("\n== LISTA DE EMPRÉSTIMOS ATRASADOS");
+
+        String resultadoListaEmprestimosAtrasados = emprestimoService.emprestimosAtrasados();
+
+        System.out.println(resultadoListaEmprestimosAtrasados);
+
     }
 
 }
