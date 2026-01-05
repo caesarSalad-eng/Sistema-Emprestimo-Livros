@@ -201,9 +201,9 @@ public class EmprestimoService {
 
             resultadoEmprestimos.append("\n Id: ").append(emprestimo.getId());
             resultadoEmprestimos.append("\nNome: ").append(emprestimo.getUsuario().getNome());
-            resultadoEmprestimos.append("Status: ").append(emprestimo.getStatusEmprestimo());
-            resultadoEmprestimos.append("Data de Empréstimo: ").append(emprestimo.getDataEmprestimo());
-            resultadoEmprestimos.append("Data Devolução: ").append(emprestimo.getDataDevolucao());
+            resultadoEmprestimos.append("\nStatus: ").append(emprestimo.getStatusEmprestimo());
+            resultadoEmprestimos.append("\nData de Empréstimo: ").append(emprestimo.getDataEmprestimo());
+            resultadoEmprestimos.append("\nData Devolução: ").append(emprestimo.getDataDevolucao());
 
         }
 

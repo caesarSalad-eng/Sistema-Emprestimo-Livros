@@ -174,6 +174,8 @@ public class UsuarioService {
 
             usuario.setEmail(novoEmail);
 
+            usuarioRepository.save(usuario);
+
         }
 
         return "Usuário Atualizado com Sucesso!!";

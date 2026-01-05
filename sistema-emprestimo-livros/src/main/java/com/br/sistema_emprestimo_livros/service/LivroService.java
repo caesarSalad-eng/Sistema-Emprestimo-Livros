@@ -21,7 +21,6 @@ public class LivroService {
 
     public LivroService(LivroRepository livroRepository, EmprestimoRepository emprestimoRepositor){
 
-
         this.livroRepository = livroRepository;
 
         this.emprestimoRepository = emprestimoRepositor;

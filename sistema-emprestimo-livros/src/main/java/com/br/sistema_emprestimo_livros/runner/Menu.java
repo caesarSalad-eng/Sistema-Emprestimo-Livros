@@ -49,10 +49,10 @@ public class Menu implements CommandLineRunner {
         System.out.println("\n3 - Empréstimos");
         System.out.println("\n4 - Sair");
 
-        int opcao = sc.nextInt();
-        sc.nextLine();
+        int opcaoMenuPrincipal = Integer.parseInt(sc.nextLine());
 
-        switch (opcao){
+
+        switch (opcaoMenuPrincipal){
 
             case 1:
 
