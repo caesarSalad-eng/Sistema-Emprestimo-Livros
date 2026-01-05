@@ -1,6 +1,10 @@
 # 📚 Sistema de Empréstimo de Livros
 
-Projeto desenvolvido em **Java com Spring Boot**, simulando um sistema de empréstimo de livros via terminal (CLI), com foco em boas práticas de backend, organização em camadas e uso do Spring Data JPA.
+Este projeto foi criado com foco em **aprendizado prático de Spring Boot** e consolidação de conceitos fundamentais de backend.
+
+Durante o desenvolvimento, percebi uma evolução clara na minha autonomia como desenvolvedor, conseguindo resolver cada vez mais problemas com menos dependência de ferramentas de IA, o que reforçou meu entendimento real da linguagem e do framework.
+
+Além disso, o projeto foi essencial para consolidar práticas de **Git e GitHub**, como versionamento de código, organização de commits e estruturação de repositórios.
 
 ---
 
